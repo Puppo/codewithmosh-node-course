@@ -7,6 +7,9 @@ const app = express();
 
 const genresRoute = require('./genres');
 
+app.set('view engine', 'pug');
+app.set('views', './views');
+
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 console.log(`app: env: ${app.get('env')}`);
 
@@ -26,7 +29,10 @@ if (app.get('env') === 'development') {
 }
 
 app.get('/', (req, res) => {
-    res.send('Hello To Vidly');
+    res.render('index', {
+        title: config.get('name'),
+        message: `Hello Word`
+    })
 });
 
 app.use('/api/genres', genresRoute.router)
