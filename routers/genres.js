@@ -3,10 +3,9 @@ const express = require('express')
 const router = express.Router();
 
 const genres = [
-    { id: 1, name: 'Genre 1' },
-    { id: 2, name: 'Genre 2' },
-    { id: 3, name: 'Genre 3' },
-    { id: 4, name: 'Genre 4' }
+    { id: 1, name: 'Action' },
+    { id: 2, name: 'Horror' },
+    { id: 3, name: 'Romance' }
 ];
 
 function validateGenre(genre) {
@@ -77,13 +76,10 @@ function remove(req, res) {
     return res.send(genre);
 }
 
-
-module.exports = {
-    router: router
-    .get('/:id', get)
-    .get('/', getAll)
-    .post('/', post)
-    .put('/:id', put)
-    .delete('/:id', remove)
-};
+module.exports = router
+.get('/:id', get)
+.get('/', getAll)
+.post('/', post)
+.put('/:id', put)
+.delete('/:id', remove);
 

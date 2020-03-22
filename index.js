@@ -5,7 +5,10 @@ const debug = require('debug')('app:startup');
 const express = require('express');
 const app = express();
 
-const genresRoute = require('./genres');
+const logger = require('./middleware/logger');
+
+const genresRoute = require('./routers/genres');
+const homeRoute = require('./routers/home');
 
 app.set('view engine', 'pug');
 app.set('views', './views');
@@ -14,6 +17,7 @@ console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 console.log(`app: env: ${app.get('env')}`);
 
 app.use(express.json());
+app.use(logger);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(helmet());
@@ -28,14 +32,9 @@ if (app.get('env') === 'development') {
     debug('Morgan enabled...')
 }
 
-app.get('/', (req, res) => {
-    res.render('index', {
-        title: config.get('name'),
-        message: `Hello Word`
-    })
-});
+app.use('/', homeRoute);
 
-app.use('/api/genres', genresRoute.router)
+app.use('/api/genres', genresRoute)
     
 
 const PORT = process.env.PORT || 3000;
