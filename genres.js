@@ -1,6 +1,6 @@
 const Joi = require('@hapi/joi');
-
-const PATH = '/api/genres';
+const express = require('express')
+const router = express.Router();
 
 const genres = [
     { id: 1, name: 'Genre 1' },
@@ -26,7 +26,6 @@ function get(req, res) {
     if (!genre) {
         return req.status(404).send('Genre not found');
     }
-
     return res.send(genre);
 }
 
@@ -80,25 +79,11 @@ function remove(req, res) {
 
 
 module.exports = {
-    get: {
-        path: PATH + '/:id',
-        method: get
-    },
-    getAll: {
-        path: PATH,
-        method: getAll
-    },
-    post: {
-        path: PATH,
-        method: post
-    },
-    put: {
-        path: PATH + '/:id',
-        method: put
-    },
-    delete: {
-        path: PATH + '/:id',
-        method: remove
-    },
-}
+    router: router
+    .get('/:id', get)
+    .get('/', getAll)
+    .post('/', post)
+    .put('/:id', put)
+    .delete('/:id', remove)
+};
 
