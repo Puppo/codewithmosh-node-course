@@ -8,6 +8,7 @@ const app = express();
 const logger = require('./middleware/logger');
 
 const genresRoute = require('./routers/genres');
+const customersRoute = require('./routers/customers');
 const homeRoute = require('./routers/home');
 
 app.set('view engine', 'pug');
@@ -15,6 +16,8 @@ app.set('views', './views');
 
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 console.log(`app: env: ${app.get('env')}`);
+
+require('./db/connection');
 
 app.use(express.json());
 app.use(logger);
@@ -34,7 +37,8 @@ if (app.get('env') === 'development') {
 
 app.use('/', homeRoute);
 
-app.use('/api/genres', genresRoute)
+app.use('/api/genres', genresRoute);
+app.use('/api/customers', customersRoute);
     
 
 const PORT = process.env.PORT || 3000;
