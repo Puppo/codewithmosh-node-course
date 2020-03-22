@@ -1,6 +1,7 @@
 const helmet = require('helmet');
 const morgan = require('morgan');
 const config = require('config');
+const debug = require('debug')('app:startup');
 const express = require('express');
 const app = express();
 
@@ -21,9 +22,8 @@ console.log(`Application Mail Password: ${config.get('mail').password}`);
 
 if (app.get('env') === 'development') {
     app.use(morgan('tiny'));
-    console.log('Morgan enabled...')
+    debug('Morgan enabled...')
 }
-
 
 app.get('/', (req, res) => {
     res.send('Hello To Vidly');
