@@ -9,6 +9,7 @@ const logger = require('./middleware/logger');
 
 const genresRoute = require('./routers/genres');
 const customersRoute = require('./routers/customers');
+const moviesRoute = require('./routers/movies');
 const homeRoute = require('./routers/home');
 
 app.set('view engine', 'pug');
@@ -39,6 +40,7 @@ app.use('/', homeRoute);
 
 app.use('/api/genres', genresRoute);
 app.use('/api/customers', customersRoute);
+app.use('/api/movies', moviesRoute);
     
 
 const PORT = process.env.PORT || 3000;
