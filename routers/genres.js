@@ -15,7 +15,7 @@ async function get(req, res) {
     try {
         const genre = await genreQuery.getById(req.params.id);
         if (!genre) {
-            return req.status(404).send('Genre not found');
+            return res.status(404).send('Genre not found');
         }
         return res.send(genre);
     } catch (ex) {

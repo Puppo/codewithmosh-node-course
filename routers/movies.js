@@ -26,7 +26,7 @@ async function get(req, res) {
     try {
         const movie = await movieQuery.getById(req.params.id);
         if (!movie) {
-            return req.status(404).send('Movie not found');
+            return res.status(404).send('Movie not found');
         }
         return res.send(movie);
     } catch (ex) {

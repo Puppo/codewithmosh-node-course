@@ -24,7 +24,9 @@
     "config": "^3.3.0",
     "debug": "^4.1.1",
     "express": "^4.17.1",
+    "fawn": "^2.1.5",
     "helmet": "^3.21.3",
+    "joi-objectid": "^3.0.1",
     "mongoose": "^5.9.5",
     "morgan": "^1.10.0",
     "pug": "^2.0.4"

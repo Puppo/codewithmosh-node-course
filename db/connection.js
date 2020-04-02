@@ -1,3 +1,4 @@
+const Fawn = require('fawn');
 const mongoose = require('mongoose');
 const debug = require('debug')('app:startup')
 
@@ -7,3 +8,5 @@ mongoose.connect('mongodb://localhost/vidly', { useNewUrlParser: true, useUnifie
     debug('Could not connect to MongoDb...', ex);
     throw ex;
 });
+
+Fawn.init(mongoose);

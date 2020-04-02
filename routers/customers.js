@@ -18,7 +18,7 @@ async function get(req, res) {
     try {
         const customer = await customerQuery.getById(req.params.id);
         if (!customer) {
-            return req.status(404).send('Customer not found');
+            return res.status(404).send('Customer not found');
         }
         return res.send(customer);
     } catch (ex) {
