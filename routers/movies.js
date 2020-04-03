@@ -6,6 +6,8 @@ const genreQuery = require('../db/queries/genre');
 const validate = require('../validations/movie');
 const getValidationMessage = require('../validations/message-error');
 
+const authMiddleware = require('../middleware/auth');
+
 function createGenre(genre) {
     return {
         id: genre._id,
@@ -112,7 +114,7 @@ async function remove(req, res) {
 module.exports = router
 .get('/:id', get)
 .get('/', getAll)
-.post('/', post)
-.put('/:id', put)
-.delete('/:id', remove);
+.post('/', authMiddleware, post)
+.put('/:id', authMiddleware, put)
+.delete('/:id', authMiddleware, remove);
 

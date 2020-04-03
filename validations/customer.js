@@ -1,12 +1,12 @@
 const Joi = require('@hapi/joi');
 
-function validateCustomer(customer) {
-    const schema = Joi.object({
-        name: Joi.string().min(5).max(50).required(),
-        phone: Joi.string().min(5).max(50).required(),
-        isGold: Joi.boolean()
-    });
+const schema = Joi.object({
+    name: Joi.string().min(5).max(50).required(),
+    phone: Joi.string().min(5).max(50).required(),
+    isGold: Joi.boolean()
+});
 
+function validateCustomer(customer) {
     return schema.validate(customer);
 }
 

@@ -5,6 +5,9 @@ const genreQuery = require('../db/queries/genre');
 const validate = require('../validations/genre');
 const getValidationMessage = require('../validations/message-error');
 
+const authMiddleware = require('../middleware/auth');
+const adminMiddleware = require('../middleware/admin');
+
 function createGenre(req) {
     return {
         name: req.body.name
@@ -89,7 +92,7 @@ async function remove(req, res) {
 module.exports = router
 .get('/:id', get)
 .get('/', getAll)
-.post('/', post)
-.put('/:id', put)
-.delete('/:id', remove);
+.post('/', authMiddleware, post)
+.put('/:id', authMiddleware, put)
+.delete('/:id', [authMiddleware, adminMiddleware], remove);
 

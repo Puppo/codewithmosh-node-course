@@ -5,6 +5,8 @@ const customerQuery = require('../db/queries/customer')
 const validate = require('../validations/customer');
 const getValidationMessage = require('../validations/message-error');
 
+const authMiddleware = require('../middleware/auth');
+
 
 function createCustomer(req) {
     return {
@@ -92,7 +94,7 @@ async function remove(req, res) {
 module.exports = router
 .get('/:id', get)
 .get('/', getAll)
-.post('/', post)
-.put('/:id', put)
-.delete('/:id', remove);
+.post('/', authMiddleware, post)
+.put('/:id', authMiddleware, put)
+.delete('/:id', authMiddleware, remove);
 

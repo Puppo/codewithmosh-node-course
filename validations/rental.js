@@ -1,11 +1,11 @@
 const Joi = require('@hapi/joi');
 
-function validateRental(customer) {
-    const schema = Joi.object({
-        customerId: Joi.objectId().required(),
-        movieId: Joi.objectId().required()
-    });
+const schema = Joi.object({
+    customerId: Joi.objectId().required(),
+    movieId: Joi.objectId().required()
+});
 
+function validateRental(customer) {
     return schema.validate(customer);
 }
 

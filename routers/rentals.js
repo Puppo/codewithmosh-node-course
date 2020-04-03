@@ -7,6 +7,8 @@ const movieQuery = require('../db/queries/movie');
 const validate = require('../validations/rental');
 const getValidationMessage = require('../validations/message-error');
 
+const authMiddleware = require('../middleware/auth');
+
 async function get(req, res) {
     try {
         const rental = await rentalQuery.getById(req.params.id);
@@ -115,7 +117,7 @@ async function remove(req, res) {
 module.exports = router
 .get('/:id', get)
 .get('/', getAll)
-.post('/', post)
-.put('/:id', put)
-.delete('/:id', remove);
+.post('/', authMiddleware, post)
+.put('/:id', authMiddleware, put)
+.delete('/:id', authMiddleware, remove);
 

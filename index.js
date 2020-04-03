@@ -6,13 +6,18 @@ const config = require('config');
 const debug = require('debug')('app:startup');
 const express = require('express');
 const app = express();
+const configCheck = require('./config/config-check');
 
-const logger = require('./middleware/logger');
+configCheck.check();
+
+const loggerMiddleware = require('./middleware/logger');
 
 const genresRoute = require('./routers/genres');
 const customersRoute = require('./routers/customers');
 const moviesRoute = require('./routers/movies');
 const rentalsRoute = require('./routers/rentals');
+const usersRoute = require('./routers/users');
+const authRoute = require('./routers/auth');
 const homeRoute = require('./routers/home');
 
 app.set('view engine', 'pug');
@@ -24,7 +29,7 @@ console.log(`app: env: ${app.get('env')}`);
 require('./db/connection');
 
 app.use(express.json());
-app.use(logger);
+app.use(loggerMiddleware);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(helmet());
@@ -45,6 +50,8 @@ app.use('/api/genres', genresRoute);
 app.use('/api/customers', customersRoute);
 app.use('/api/movies', moviesRoute);
 app.use('/api/rentals', rentalsRoute);
+app.use('/api/users', usersRoute);
+app.use('/api/auth', authRoute);
     
 
 const PORT = process.env.PORT || 3000;
