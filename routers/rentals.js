@@ -10,65 +10,40 @@ const getValidationMessage = require('../validations/message-error');
 const authMiddleware = require('../middleware/auth');
 
 async function get(req, res) {
-    try {
-        const rental = await rentalQuery.getById(req.params.id);
-        if (!rental) {
-            return res.status(404).send('Rental not found');
-        }
-        return res.send(rental);
-    } catch (ex) {
-        console.error(ex);
-        return res.status(500).send();
+    const rental = await rentalQuery.getById(req.params.id);
+    if (!rental) {
+        return res.status(404).send('Rental not found');
     }
+    return res.send(rental);
 }
 
 async function getAll(req, res) {
-    try {
-        return res.send(await rentalQuery.getAll());
-    } catch (ex) {
-        console.error(ex);
-        return res.status(500).send();
-    }
+    return res.send(await rentalQuery.getAll());
 }
 
 async function post(req, res) {
-    try {
-        const validation = validate(req.body);
-        if (validation.error) {
-            return res.status(400).send(
-                getValidationMessage(validation)
-            );
-        }
+    const validation = validate(req.body);
+    if (validation.error) {
+        return res.status(400).send(
+            getValidationMessage(validation)
+        );
+    }
 
-        const customer = await customerQuery.getById(req.body.customerId);
-        if (!customer) {
-            return res.status(400).send('Customer not found');
-        }
+    const customer = await customerQuery.getById(req.body.customerId);
+    if (!customer) {
+        return res.status(400).send('Customer not found');
+    }
 
-        const movie = await movieQuery.getById(req.body.movieId);
-        if (!movie) {
-            return res.status(400).send('Movie not found');
-        }
+    const movie = await movieQuery.getById(req.body.movieId);
+    if (!movie) {
+        return res.status(400).send('Movie not found');
+    }
 
-        if (movie.numberInStock === 0) {
-            return res.status(400).send('Movie not in stock');
-        }
+    if (movie.numberInStock === 0) {
+        return res.status(400).send('Movie not in stock');
+    }
 
-        try {
-            return res.send(await rentalQuery.create(customer, movie));
-        } catch (ex) {
-            return res.status(500).send(ex.message);
-        }
-    } catch (ex) {
-        console.error(ex);
-        const errors = [];
-        if (ex.errors) {
-            for (const field in ex.errors) {
-                errors.push(ex.errors[field].message);
-            }
-        }
-        return res.status(500).send(errors.length ? errors : ex);
-    }    
+    return res.send(await rentalQuery.create(customer, movie));    
 }
 
 async function put(req, res) {
@@ -96,8 +71,7 @@ async function put(req, res) {
         }
         return res.status(404).send('Rental not found');
     } catch (ex) {
-        console.error(ex);
-        return res.status(500).send();
+        next(ex);
     }
 }
 
@@ -109,8 +83,7 @@ async function remove(req, res) {
         }
         return res.status(404).send('Rental not found');
     } catch (ex) {
-        console.error(ex);
-        return res.status(500).send();
+        next(ex);
     }
 }
 

@@ -5,6 +5,6 @@ const router = express.Router();
 module.exports = router.get('/', (req, res) => {
     res.render('index', {
         title: config.get('name'),
-        message: `Hello Word`
+        message: `Hello to ${config.get('name')}`
     })
 });

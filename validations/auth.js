@@ -1,5 +1,4 @@
 const Joi = require('@hapi/joi');
-const passwordComplexity = require('joi-password-complexity')
 
 const schema = Joi.object({
     email: Joi.string().email().min(5).max(255).required(),

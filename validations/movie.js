@@ -8,7 +8,7 @@ const schema = Joi.object({
 });
 
 function validateMovie(movie) {
-return schema.validate(movie);
+    return schema.validate(movie);
 }
 
 module.exports = validateMovie;
