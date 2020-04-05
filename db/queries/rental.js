@@ -25,6 +25,10 @@ async function getById(id) {
     return await RentalModel.findOne({ _id: id });
 }
 
+async function getByCustomerAndMovie(customerId, movieId) {
+    return await RentalModel.lookup(customerId, movieId);
+}
+
 async function create(customer, movie) {
     try {
         const rental = createRental(customer, movie);
@@ -54,6 +58,7 @@ async function remove(id) {
 module.exports = {
     getAll,
     getById,
+    getByCustomerAndMovie,
     create,
     update,
     remove

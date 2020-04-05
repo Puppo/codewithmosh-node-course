@@ -23,10 +23,17 @@ async function remove(id) {
     return await Movie.deleteOne({ _id: id});
 }
 
+async function incrementMovieStock(id) {
+    await Movie.updateOne({ _id: id }, {
+        $inc: { numberInStock: 1 } 
+    });
+}
+
 module.exports = {
     getAll,
     getById,
     create,
     update,
-    remove
+    remove,
+    incrementMovieStock
 }

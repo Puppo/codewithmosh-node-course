@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const moment = require('moment');
 
 const rentalSchema = mongoose.Schema({
     customer: {
@@ -54,6 +55,20 @@ const rentalSchema = mongoose.Schema({
         min: 0
     }
 });
+
+rentalSchema.statics.lookup = function(customerId, movieId) {
+    return this.findOne({ 
+        'customer._id': customerId,
+        'movie._id': movieId
+     });
+}
+
+rentalSchema.methods.return = function() {
+    this.dateReturn = new Date();
+    
+    const rentalDays = moment().diff(this.dateOut, 'days');
+    this.rentalFee = rentalDays * this.movie.dailyRentalRate;
+}
 
 const RentalModel = new mongoose.model('Rental', rentalSchema);
 

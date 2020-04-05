@@ -8,5 +8,9 @@
         "statusBar.background": "#eb5424",
         "statusBarItem.hoverBackground": "#ef7853"
     },
-    "peacock.color": "#eb5424"
+    "peacock.color": "#eb5424",
+    "jestrunner.runOptions": [
+        "--detectOpenHandles",
+        "--runInBand"
+    ]
 }

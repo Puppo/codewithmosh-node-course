@@ -10,6 +10,7 @@ const moviesRoute = require('./movies');
 const rentalsRoute = require('./rentals');
 const usersRoute = require('./users');
 const authRoute = require('./auth');
+const returnsRoute = require('./returns');
 const homeRoute = require('./home');
 
 const errorMiddleware = require('../middleware/error');
@@ -31,6 +32,7 @@ module.exports = function(app) {
     app.use('/api/movies', moviesRoute);
     app.use('/api/rentals', rentalsRoute);
     app.use('/api/users', usersRoute);
+    app.use('/api/returns', returnsRoute)
     app.use('/api/auth', authRoute);
     app.use(errorMiddleware);
     
