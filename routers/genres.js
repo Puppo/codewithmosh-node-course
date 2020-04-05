@@ -7,6 +7,7 @@ const getValidationMessage = require('../validations/message-error');
 
 const authMiddleware = require('../middleware/auth');
 const adminMiddleware = require('../middleware/admin');
+const validateObjectIdMiddleware = require('../middleware/validate-object-id');
 
 function createGenre(req) {
     return {
@@ -23,7 +24,6 @@ async function get(req, res, next) {
 }
 
 async function getAll(req, res) {
-    throw new Error('Not Implements exception');
     return res.send(await genreQuery.getAll());
 }
 
@@ -60,7 +60,7 @@ async function remove(req, res) {
 }
 
 module.exports = router
-.get('/:id', get)
+.get('/:id', validateObjectIdMiddleware, get)
 .get('/', getAll)
 .post('/', authMiddleware, post)
 .put('/:id', authMiddleware, put)

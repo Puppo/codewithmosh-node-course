@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const { model: Movie } = require('../models/movie');
 
 async function getAll() {
@@ -5,7 +6,7 @@ async function getAll() {
 }
 
 async function getById(id) {
-    return await Movie.findOne({ _id: id });
+    return mongoose.Types.ObjectId.isValid(id) ? await Movie.findById(id) : null;
 }
 
 async function create(movie) {

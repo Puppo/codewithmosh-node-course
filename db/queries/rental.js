@@ -1,4 +1,5 @@
 const Fawn = require('fawn');
+const mongoose = require('mongoose');
 const { model: RentalModel } = require('../models/rental');
 
 function createRental(customer, movie) {

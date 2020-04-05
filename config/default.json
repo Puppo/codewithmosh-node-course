@@ -1,4 +1,6 @@
 {
     "name": "My Vidly App",
-    "jwtPrivateKey": ""
+    "jwtPrivateKey": "",
+    "db": "",
+    "dbLogger": ""
 }

@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const { model: Customer } = require('../models/customer');
 
 async function getAll() {
@@ -5,7 +6,7 @@ async function getAll() {
 }
 
 async function getById(id) {
-    return await Customer.findOne({ _id: id });
+    return mongoose.Types.ObjectId.isValid(id) ? await Customer.findById(id) : null;
 }
 
 async function create(customer) {

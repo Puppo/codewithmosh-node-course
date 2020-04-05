@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const { model: User } = require('../models/user');
 
 async function getAll() {
@@ -5,8 +6,7 @@ async function getAll() {
 }
 
 async function getById(id) {
-    return await User.findOne({ _id: id })
-    .select('-password');
+    return mongoose.Types.ObjectId.isValid(id) ? await User.findOne({ _id: id }).select('-password') : null;
 }
 
 async function getByEmail(email) {

@@ -1,10 +1,10 @@
-const config = require('config');
 const express = require('express');
 const router = express.Router();
+const config = require('../config/config');
 
 module.exports = router.get('/', (req, res) => {
     res.render('index', {
-        title: config.get('name'),
-        message: `Hello to ${config.get('name')}`
+        title: config.name(),
+        message: `Hello to ${config.name()}`
     })
 });
