@@ -1,5 +1,4 @@
 require('express-async-errors');
-const helmet = require('helmet');
 const morgan = require('morgan');
 const debug = require('debug')('app:startup');
 const express = require('express');
@@ -23,7 +22,6 @@ module.exports = function(app) {
     }
 
     app.use(express.urlencoded({ extended: true }));
-    app.use(helmet());
 
     app.use(express.json());
     app.use('/', homeRoute);
