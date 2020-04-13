@@ -6,7 +6,9 @@
         "titleBar.activeBackground": "#eb5424",
         "titleBar.inactiveBackground": "#eb542499",
         "statusBar.background": "#eb5424",
-        "statusBarItem.hoverBackground": "#ef7853"
+        "statusBarItem.hoverBackground": "#ef7853",
+        "statusBar.border": "#eb5424",
+        "titleBar.border": "#eb5424"
     },
     "peacock.color": "#eb5424",
     "jestrunner.runOptions": [
